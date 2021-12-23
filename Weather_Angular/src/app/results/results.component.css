@@ -1,0 +1,27 @@
+.resultsContainer{
+    margin-top: 75px;
+}
+.resultscontianer{
+    /*width: 830px;*/
+    height: 600px;
+    
+    margin-right: auto;
+    margin-left: auto;
+}
+.statusImage{
+    width: 40px;
+    height: 40px;
+    float:right;
+}
+.resultbuttons{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin:20px;
+}
+.address{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:50px;
+}

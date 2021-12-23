@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="row">
+    <div class="col-2">
+    <button mat-stroked-button (click)="goToList()" >
+        <mat-icon>chevron_left</mat-icon>List
+    </button>
+    </div>
+    <div class="d-flex col-8 justify-content-center">
+    <strong>{{currentDate|date:'fullDate'}}</strong>
+    </div>
+    <div class="d-flex col-2 justify-content-right align-items-right">
+    <button style="justify-content: right;" (click)="openTwitter()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-twitter" viewBox="0 0 16 16">
+    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+    </svg>
+    <!--<a class="twitter-share-button" hashtags=""
+        href="https://twitter.com/intent/tweet?text=twitterText" target="_blank"></a>   --> 
+    </button>
+    </div>
+    </div>
+</div>
+<div class="container">
+<div class="table-responsive-sm mt-3 pt-3">
+<table class="table table-striped" style="width:100%;border-spacing: 0 12px;">
+    <tbody>
+    <tr>
+        <td><strong>Status</strong></td>
+        <td [ngSwitch] = "currentData.weatherCode">
+            <p *ngSwitchCase='1000'>Clear</p>
+            <p *ngSwitchCase='1001'>Cloudy</p>
+            <p *ngSwitchCase='1100'>Mostly Clear</p> 
+            <p *ngSwitchCase='1101'>Partly Cloudy</p>
+            <p *ngSwitchCase='1102'>Mostly Cloudy</p>
+            <p *ngSwitchCase='2000'>Fog </p>
+            <p *ngSwitchCase='2100'>Light Fog</p> 
+            <p *ngSwitchCase='3000'>Light Wind</p>
+            <p *ngSwitchCase='3001'>Wind </p>
+            <p *ngSwitchCase='3002'>Strong Wind</p>
+            <p *ngSwitchCase='4000'>Drizzle</p>  
+            <p *ngSwitchCase='4001'>Rain </p>
+            <p *ngSwitchCase='4200'>Light Rain</p>
+            <p *ngSwitchCase='4201'>Heavy Rain</p>
+            <p *ngSwitchCase='5000'>Snow </p>
+            <p *ngSwitchCase='5001'>Flurries </p>
+            <p *ngSwitchCase='5100'>Light Snow</p>
+            <p *ngSwitchCase='5101'>Heavy Snow</p>
+            <p *ngSwitchCase='6000'>Freezing Drizzle</p>
+            <p *ngSwitchCase='6001'>Freezing Rain </p>
+            <p *ngSwitchCase='6201'>Heavy Freezing Rain </p>
+            <p *ngSwitchCase='6200'>Light Freezing Rain </p>
+            <p *ngSwitchCase='7000'>Ice Pellets </p>
+            <p *ngSwitchCase='7101'>Heavy Ice Pellets</p>
+            <p *ngSwitchCase='7102'>Light Ice Pellets</p>
+            <p *ngSwitchCase='8000'>Thunderstorm</p>
+            <p *ngSwitchDefault>Clear</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong> Temperature </strong></td>
+        <td>{{currentData.temperatureMax}} °F</td>
+    </tr>
+    
+    <tr>
+        <td><strong>Min Temperature</strong></td>
+        <td>{{currentData.temperatureMin}} °F</td>
+    </tr>
+    
+    <tr>
+        <td><strong> Temperature </strong></td>
+        <td>{{currentData.temperatureApparent}} °F</td>
+    </tr>
+    
+    <tr>
+        <td><strong> Rise Time </strong></td>
+        <td>{{currentData.sunriseTime|date:'mediumTime'}}</td>
+    </tr>
+    
+    <tr>
+        <td><strong> Set Time </strong></td>
+        <td>{{currentData.sunsetTime|date:'mediumTime'}}</td>
+    </tr>
+    
+    <tr>
+        <td><strong>Humidity</strong></td>
+        <td>{{currentData.humidity}} %</td>
+    </tr>
+    
+    <tr>
+        <td><strong>Wind Speed</strong></td>
+        <td>{{currentData.windSpeed}} mph</td>
+    </tr>
+    
+    <tr>
+        <td><strong>Visibility</strong></td>
+        <td>{{currentData.visibility}} mi</td>
+    </tr>
+
+    
+    <tr>
+        <td> <strong>Cloud Cover</strong></td>
+        <td>{{currentData.cloudCover}}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+<app-map-details></app-map-details>

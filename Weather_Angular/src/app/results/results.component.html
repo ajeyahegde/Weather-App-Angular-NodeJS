@@ -1,0 +1,145 @@
+<div *ngIf="!hasData">
+  <div class="alert alert-danger" role="alert">
+    <strong>No records found. Please try again.</strong> 
+  </div>
+</div>
+<div class="container" *ngIf="hasData">
+
+<div class="d-flex col-sm-12 justify-content-center mb-3 mt-3 pt-3">
+      <p><strong>Forecast at {{location}} </strong></p>
+</div>
+
+<div class="resultbuttons">
+  <div>
+  <button mat-stroked-button (click)="saveDatatoLocalStorage()">
+    <mat-icon *ngIf="isFavoriteChecked" style="color:yellow;">
+      star
+    </mat-icon>
+  
+    <mat-icon *ngIf="!isFavoriteChecked">
+      star_border
+    </mat-icon>
+  </button>
+  </div>
+  <div>
+  <button mat-stroked-button [disabled]="currentIndex == -1" (click)="getDetails()">
+    Details<mat-icon>chevron_right</mat-icon>
+  </button>
+  </div>
+</div>
+
+
+<div class="resultscontianer" id="resultsDiv">
+
+<nav ngbNav #nav="ngbNav" class="nav-tabs row" style="justify-content: right;">
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Day View</a>
+      <ng-template ngbNavContent>
+        <app-daily-view-data></app-daily-view-data>
+        <!--<div class="container col-sm-12" id="resultsTable">
+            <table class="table table-striped " style="width:100%;border-spacing: 0 12px;">
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th colspan="2">Status</th>
+                    <th>Temp. High(F)</th>
+                    <th>Temp. Low(F)</th>
+                    <th>Wind Speed (mph)</th>
+                </tr>
+                <tr *ngFor="let row of day_weather;index as i">
+                        <td style="text-align:center">{{i+1}}</td>
+                        <td style="text-align:center" (click)="goToDetails(i)">
+                          <a href='javascript:;'><u>   {{row.startTime|date:'fullDate'}}</u>
+                        </a>
+                        </td>
+                        <td style="text-align:center">
+                        <div class="statusImage" [ngSwitch] = "row.values.weatherCode">
+                            <img src="../../assets/images/clear_day.svg" *ngSwitchCase="'1000'">
+                            <img src="../../assets/images/cloudy.svg" *ngSwitchCase="'1001'">
+                            <img src="../../assets/images/mostly_clear_day.svg" *ngSwitchCase="'1100'">
+                            <img src="../../assets/images/partly_cloudy_day.svg" *ngSwitchCase="'1101'">
+                            <img src="../../assets/images/mostly_cloudy.svg" *ngSwitchCase="'1102'">
+                            <img src="../../assets/images/fog.svg" *ngSwitchCase="'2000'">
+                            <img src="../../assets/images/fog_light.svg" *ngSwitchCase="'2100'">
+                            <img src="../../assets/images/light_wind.jpg" *ngSwitchCase="'3000'">
+                            <img src="../../assets/images/wind.png" *ngSwitchCase="'3001'">
+                            <img src="../../assets/images/strong-wind.png" *ngSwitchCase="'3002'">
+                            <img src="../../assets/images/drizzle.svg" *ngSwitchCase="'4000'">
+                            <img src="../../assets/images/rain.svg" *ngSwitchCase="'4001'">
+                            <img src="../../assets/images/rain_light.svg" *ngSwitchCase="'4200'">
+                            <img src="../../assets/images/rain_heavy.svg" *ngSwitchCase="'4201'">
+                            <img src="../../assets/images/snow.svg" *ngSwitchCase="'5000'">
+                            <img src="../../assets/images/flurries.svg" *ngSwitchCase="'5001'">
+                            <img src="../../assets/images/snow_light.svg" *ngSwitchCase="'5100'">
+                            <img src="../../assets/images/snow_heavy.svg" *ngSwitchCase="'5101'">
+                            <img src="../../assets/images/freezing_drizzle.svg" *ngSwitchCase="'6000'">
+                            <img src="../../assets/images/freezing_rain.svg" *ngSwitchCase="'6001'">
+                            <img src="../../assets/images/freezing_rain_heavy.svg" *ngSwitchCase="'6201'">
+                            <img src="../../assets/images/freezing_rain_light.svg" *ngSwitchCase="'6200'">
+                            <img src="../../assets/images/ice_pellets.svg" *ngSwitchCase="'7000'">
+                            <img src="../../assets/images/ice_pellets_heavy.svg" *ngSwitchCase="'7101'">
+                            <img src="../../assets/images/ice_pellets_light.svg" *ngSwitchCase="'7102'">
+                            <img src="../../assets/images/tstorm.svg" *ngSwitchCase="'8000'">
+                            <img src="../../assets/images/clear_day.svg" *ngSwitchDefault>
+                        </div>
+                        </td> 
+                        <td>
+                          <div [ngSwitch] = "row.values.weatherCode"> 
+                            <p *ngSwitchCase='1000'>Clear</p>
+                            <p *ngSwitchCase='1001'>Cloudy</p>
+                            <p *ngSwitchCase='1100'>Mostly Clear</p> 
+                            <p *ngSwitchCase='1101'>Partly Cloudy</p>
+                            <p *ngSwitchCase='1102'>Mostly Cloudy</p>
+                            <p *ngSwitchCase='2000'>Fog </p>
+                            <p *ngSwitchCase='2100'>Light Fog</p> 
+                            <p *ngSwitchCase='3000'>Light Wind</p>
+                            <p *ngSwitchCase='3001'>Wind </p>
+                            <p *ngSwitchCase='3002'>Strong Wind</p>
+                            <p *ngSwitchCase='4000'>Drizzle</p>  
+                            <p *ngSwitchCase='4001'>Rain </p>
+                            <p *ngSwitchCase='4200'>Light Rain</p>
+                            <p *ngSwitchCase='4201'>Heavy Rain</p>
+                            <p *ngSwitchCase='5000'>Snow </p>
+                            <p *ngSwitchCase='5001'>Flurries </p>
+                            <p *ngSwitchCase='5100'>Light Snow</p>
+                            <p *ngSwitchCase='5101'>Heavy Snow</p>
+                            <p *ngSwitchCase='6000'>Freezing Drizzle</p>
+                            <p *ngSwitchCase='6001'>Freezing Rain </p>
+                            <p *ngSwitchCase='6201'>Heavy Freezing Rain </p>
+                            <p *ngSwitchCase='6200'>Light Freezing Rain </p>
+                            <p *ngSwitchCase='7000'>Ice Pellets </p>
+                            <p *ngSwitchCase='7101'>Heavy Ice Pellets</p>
+                            <p *ngSwitchCase='7102'>Light Ice Pellets</p>
+                            <p *ngSwitchCase='8000'>Thunderstorm</p>
+                            <p *ngSwitchDefault>Clear</p>
+                            </div>
+                        </td>
+                        <td style="text-align:center">{{row.values.temperatureMax}}</td>
+                        <td style="text-align:center">{{row.values.temperatureMin}}</td>
+                        <td style="text-align:center">{{row.values.windSpeed}}</td>
+                </tr>
+                
+            </table>    
+        </div>-->
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Daily Temp. Chart</a>
+      <ng-template ngbNavContent>
+        <app-temp-chart [weatherDaysData] = "day_arr"></app-temp-chart>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Meteogram</a>
+      <ng-template ngbNavContent>
+        <app-meteogram-chart></app-meteogram-chart>
+      </ng-template>
+    </ng-container>
+  </nav>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  
+  <!--<pre>Active: {{ active }}</pre>-->
+
+</div>
+</div>
