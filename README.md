@@ -1,5 +1,7 @@
 # Weather-App-Angular-NodeJS
 Weather Application using Angular and NodeJS
 
-https://user-images.githubusercontent.com/89498859/147380369-5f1f5cd8-f1a8-441c-961b-9497999b57a1.mp4
+Demo Video of the Application:
+
+https://user-images.githubusercontent.com/89498859/147380525-dab99ff7-0fa7-4958-87fd-34156d756604.mp4
 
