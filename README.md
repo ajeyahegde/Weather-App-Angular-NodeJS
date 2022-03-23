@@ -14,14 +14,13 @@ Deployed on Google Cloud Platform.
 
 **Technologies Used:** NodeJS, Angular, Google Cloud Platform, AJAX and JSON, Bootstrap.
 
-**APIs Used:
-**
+**APIs Used:**
 1) Tomorrow.io API - To get Weather Data
 2) Geocoding API - To convert users form input to location information.
 3) Google Places API - To get the search suggestion for the City text input.
 4) IPInfo API - To get location information from users IP.
 
-**Libraries - **
+**Libraries -**
 
 1) Angular Google Maps - To display User's location on Google Map.
 2) Highcharts Angular - For chart representation of Weather Data. 
